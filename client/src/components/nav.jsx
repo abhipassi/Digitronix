@@ -13,6 +13,7 @@ function Nav() {
          <Link to='/' className='cursor-pointer'>Home</Link>
          <Link to='/login' className='cursor-pointer'>Shop</Link>
          <Link to='#' className='cursor-pointer'>Support</Link>
+         <Link to='/register' className='cursor-pointer '>SignUp</Link>
     </div>
     </div>
     
