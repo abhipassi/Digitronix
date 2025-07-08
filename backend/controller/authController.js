@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import userModel from '../models/user'
 
 // route for checking 
-export const demo = (req, res) => {
+export const demo = (req,res) => {
   res.json('Live');
 };
 
@@ -16,8 +17,14 @@ export const userLogin = (req,res) =>{
 
 // function for user sign up 
 
-export const userSignUp = (req,res) =>{
+export const userSignUp = async (req,res) =>{
   let {fullname, email, password} = req.body
+
+  if(!fullname || !email || ! password){
+     return res.status(404).json("Kindly Provide the data")
+  }
+
+
   res.json("Done")
   console.log(req.body);
   
