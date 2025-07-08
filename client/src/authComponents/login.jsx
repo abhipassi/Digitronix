@@ -33,7 +33,6 @@ function Login() {
       </div>
       <br />
       <br /><br />
-      <br />
       <form onSubmit={handleCredentialSubmit} className="max-w-sm mx-auto">
         <div className="mb-5">
           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
