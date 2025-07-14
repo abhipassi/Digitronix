@@ -5,7 +5,8 @@ const router = express.Router()
 import {
     demo,
     userLogin,
-    userSignUp
+    userSignUp,
+    // getEmailForVerification
 } from '../controller/authController.js'
 
 // public routes 
@@ -16,9 +17,12 @@ router.get('/demo', demo)
 // route for login 
 router.post('/login', userLogin )
 
-// router of SignUp 
+// route of SignUp 
 
 router.post('/register', userSignUp)
+
+// route for email verificaion 
+// router.post('/getEmail',getEmailForVerification )
 
 
 // protected routes
