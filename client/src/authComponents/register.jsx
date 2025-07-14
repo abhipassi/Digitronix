@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -10,6 +11,7 @@ function Register() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+  let navigate = useNavigate()
 
   let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passRegex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&\\-+=()])(?=\\S+$).{8,20}$");
@@ -31,11 +33,11 @@ function Register() {
     setConfirmPassword(e.target.value)
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     let data = { fullname, email, password }
     console.log(data);
+    sessionStorage.setItem("email", email)
 
     if (password !== confirmPassword) {
       return toast.error("Password does not match!")
@@ -44,20 +46,28 @@ function Register() {
     else if (!regex.test(email)) {
       return toast.error("Kindly enter valid email address")
     }
-
     else if (!passRegex.test(password)) {
       return toast.error(passError)
     }
     else {
       try {
         let response = await axios.post('http://localhost:5000/register', data)
-        if (response.status === 200 || response.status === 201) return toast.success("Welcome")
-
-        console.log(response);
-
+        if (response.status === 200 || response.status === 201) {
+          toast.success("OTP sent")
+          navigate('/otp')
+        }
+        // console.log(response);
       } catch (error) {
-        console.log(error);
-
+        if (error.response.status === 400 ){
+          return toast.error("This email is already in use")
+        }
+        else if(error.response.status === 500){
+          return toast.error("Internal server error")
+        }
+        else{
+          return toast.error("Something went wrong")
+        }
+        // console.log(error);
       }
     }
   }
@@ -90,7 +100,6 @@ function Register() {
 
         <button type="submit" className="text-white bg-blue-200 hover:bg-blue-300 focus:ring-2 focus:outline-none font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:focus:ring-blue-400">Sign Up</button>
       </form>
-
     </>
   )
 }
