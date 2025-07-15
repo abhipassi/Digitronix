@@ -1,29 +1,43 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  let navigate = useNavigate()
   const handleEmail = (e) => {
     setEmail(e.target.value)
   }
-  const handlePassword = (e) =>{
+  const handlePassword = (e) => {
     setPassword(e.target.value)
   }
 
-  const handleCredentialSubmit = async(e) =>{
+  const handleCredentialSubmit = async (e) => {
     e.preventDefault()
-    let data = {email, password}
+    let data = { email, password }
 
     try {
-      let response = await axios.post('http://localhost:5000/login',data)
-      console.log(response);
-      
+      let response = await axios.post('http://localhost:5000/login', data)
+      if (response.status === 200) {
+        toast.success("Welcome Back")
+        navigate('/')
+      }
+
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 401) {
+        return toast.error("Wrong credential ")
+      }
+      else if( error.response.status === 400){
+        return toast.error("User not found! Register first")
+      }
+      else{
+        return toast.error("Something Went wrong")
+      }
     }
   }
   return (
