@@ -4,16 +4,41 @@ import userModel from '../models/user.js'
 import { sendVerificationCode } from '../middleware/email.js';
 
 
-// route for checking 
+// function for checking 
 export const demo = (req, res) => {
   res.json('Live');
 };
 
 // function for user login 
-export const userLogin = (req, res) => {
+export const userLogin = async (req, res) => {
   let { email, password } = req.body
-  res.json("Done")
-  console.log(req.body);
+
+  if (!email || !password) {
+    return res.status(404).json("Kindly provide the data")
+  }
+
+  try {
+    const checkUserFromDb = await userModel.findOne({ email: email })
+    if (checkUserFromDb) {
+      const encryptedPassword = checkUserFromDb.password
+      const isMatch = await bcrypt.compare(password, encryptedPassword)
+
+      if (isMatch) {
+        const token = jwt.sign({ email: email }, process.env.JWT_SECRET)
+        res.cookie('token', token)
+        return res.status(200).json({ message: "Login Successful" })
+      }
+
+      else if (!isMatch) {
+        return res.status(401).json({ message: "Wrong Password" })
+      }
+    }
+    else {
+      return res.status(400).json("User not found")
+    }
+  } catch (error) {
+    return res.status(500).json(error)
+  }
 }
 
 
@@ -65,6 +90,8 @@ export const userSignUp = async (req, res) => {
 
 export const otpVerification = async (req, res) => {
   const { email, verificationCode } = req.body
+  console.log(verificationCode);
+
 
   if (!verificationCode) {
     res.status(400).json({ message: 'verification code is required.' })
@@ -77,9 +104,13 @@ export const otpVerification = async (req, res) => {
     const isMatch = await bcrypt.compare(verificationCode, encryptedCode)
 
     if (isMatch) {
+      // res.json("Done")
       const token = jwt.sign({ email: email }, process.env.JWT_SECRET)
       res.cookie('token', token)
       return res.status(200).json({ message: "Verified" })
+    }
+    else if (!isMatch) {
+      return res.status(401).json({ message: "Wrong OTP" })
     }
     else {
       return res.status(404).json({ message: "Invalid or expired verification code." })
@@ -89,9 +120,3 @@ export const otpVerification = async (req, res) => {
     return res.status(500).json({ message: 'Server error during verification.' });
   }
 }
-
-// export const getEmailForVerification =  async (req,res) =>{
-//   let {email} =req.body
-//   console.log(req.body);
-//   res.json("Got it")
-// }

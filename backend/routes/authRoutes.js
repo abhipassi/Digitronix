@@ -6,6 +6,7 @@ import {
     demo,
     userLogin,
     userSignUp,
+    otpVerification
     // getEmailForVerification
 } from '../controller/authController.js'
 
@@ -26,7 +27,6 @@ router.post('/register', userSignUp)
 
 
 // protected routes
-
-
+router.post('/otpVerification', otpVerification)
 
 export default router;
