@@ -108,14 +108,14 @@ function Sidebar({ children }) {
                   <Link to="/adminProducts">All Products</Link>
                 </li>
                 <li className="hover:text-gray-300 cursor-pointer">
-                  <Link to="/adminProducts/add">Add Product</Link>
+                  <Link to="/adminManageProducts">Manage Products</Link>
                 </li>
               </ul>
             )}
           </li>
 
           <li className="hover:bg-gray-800 p-2 rounded cursor-pointer">
-            <Link to="/adminOrders" className="flex items-center gap-2">
+            <Link to="/adminOrder" className="flex items-center gap-2">
               <ShoppingCart size={18} />
               <span>Orders</span>
             </Link>
