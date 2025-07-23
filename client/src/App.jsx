@@ -6,6 +6,14 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// admin sidebar components 
+import Products from './authComponents/products.jsx';
+import Customers from './authComponents/customers.jsx';
+import Setting from './authComponents/setting.jsx';
+import AdminDasboard from './authComponents/adminDashboard.jsx';
+import Order from './authComponents/order.jsx';
+import Sidebar from './authComponents/sidebar.jsx';
+import ManageProducts from './authComponents/manageProducts.jsx';
 function App() {
   return (
     <>
@@ -14,6 +22,13 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/otp" element={<OtpModal />} />
+      <Route path='/adminProducts' element={<Products />}/>
+      <Route path='/adminCustomers' element= {<Customers />}/>
+      <Route path='/adminSetting' element = {<Setting />}/>
+      <Route path='/adminDashboard' element = {<AdminDasboard />}/>
+      <Route path='/adminOrder' element = {<Order />}/>
+      <Route path='/adminSidebar' element = {<Sidebar/>}/>
+      <Route path='/adminManageProducts' element = {<ManageProducts/>}/>
     </Routes>
     <ToastContainer position="top-right" autoClose={4000} limit={1} />
     </>
