@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Sidebar from './sidebar'
 function Order() {
   return (
-    <div>Order</div>
+    <Sidebar>
+      <div>Order</div>
+    </Sidebar>
   )
 }
 

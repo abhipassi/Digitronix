@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Sidebar from './sidebar'
 function Customers() {
   return (
-    <div>Customers</div>
+    <Sidebar >
+      <div>Customers</div>
+    </Sidebar>
   )
 }
 

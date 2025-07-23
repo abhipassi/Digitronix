@@ -1,8 +1,12 @@
 import React from 'react'
+import Sidebar from './sidebar'
 
 function Setting() {
   return (
-    <div>Setting</div>
+    <Sidebar >
+
+      <div>Setting</div>
+    </Sidebar>
   )
 }
 
