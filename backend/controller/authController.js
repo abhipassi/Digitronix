@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import userModel from '../models/user.js'
+import categoryModel from '../models/category.js'
 import { sendVerificationCode } from '../middleware/email.js';
 
 
@@ -118,5 +119,44 @@ export const otpVerification = async (req, res) => {
   } catch (error) {
     console.error('OTP verification error:', error);
     return res.status(500).json({ message: 'Server error during verification.' });
+  }
+}
+
+export const createCategory = async (req, res) => {
+  const { categoryName, categoryDescription } = req.body
+  try {
+    const isExistingCategory = await categoryModel.findOne({ categoryName })
+    if (isExistingCategory) {
+      return res.status(400).json({ msg: "Category already exist" })
+    }
+
+    await categoryModel.create({
+      categoryName: categoryName,
+      categoryDescription: categoryDescription
+    })
+    return res.status(200).json({ msg: "Category created successfuly" })
+  }
+  catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+export const showCategory = async (req, res) => {
+  try {
+    const category = await categoryModel.find()
+    res.json(category)
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+export const deleteCategory = async(req,res) =>{
+  const {categoryName} = req.body
+  try {
+    await categoryModel.deleteOne({categoryName})
+    return res.status(200).json({msg:"Category Deleted Successfuly"})
+  } catch (error) {
+    console.log(error);
   }
 }

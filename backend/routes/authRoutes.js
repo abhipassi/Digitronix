@@ -6,7 +6,9 @@ import {
     demo,
     userLogin,
     userSignUp,
-    otpVerification
+    otpVerification,
+    createCategory,
+    showCategory
     // getEmailForVerification
 } from '../controller/authController.js'
 
@@ -27,6 +29,12 @@ router.post('/register', userSignUp)
 
 
 // protected routes
+// route for email verification via OTP 
 router.post('/otpVerification', otpVerification)
 
+// route for creating category 
+router.post('/createCategory', createCategory)
+
+// route for getting category in response 
+router.get('/showCategory', showCategory)
 export default router;
