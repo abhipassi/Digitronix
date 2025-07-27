@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import userModel from '../models/user.js'
 import categoryModel from '../models/category.js'
 import { sendVerificationCode } from '../middleware/email.js';
+import { application } from 'express';
 
 
 // function for checking 
