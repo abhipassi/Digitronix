@@ -12,9 +12,9 @@ function CategoryManagement() {
       })
   }, [])
 
-  const handleDelete = (e) => {
-    
-  }
+    const handleDelete = (e) => {
+      
+    }
   return (
     <>
       <Sidebar>
@@ -35,7 +35,7 @@ function CategoryManagement() {
                   <td className="p-2 border">{cat.categoryDescription}</td>
                   <td className="p-2 border">
                     <button className="text-blue-600 hover:underline">Edit</button> |{" "}
-                    <button className="text-red-600 hover:underline">Delete</button>
+                    <button className="text-red-600 hover:underline" value={cat.categoryName} onClick={handleDelete} >Delete</button>
                   </td>
                 </tr>
               ))}
