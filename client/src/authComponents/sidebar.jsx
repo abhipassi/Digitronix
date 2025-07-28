@@ -38,13 +38,13 @@ function Sidebar({ children }) {
 
             {showProducts && (
               <ul className="pl-8 mt-1 space-y-1 text-sm">
-                <li className="hover:text-gray-300 cursor-pointer">
+                <li className="hover:text-gray-300 cursor-pointer pt-2">
                   <Link to="/adminProducts">All Products</Link>
                 </li>
-                <li className="hover:text-gray-300 cursor-pointer">
+                <li className="hover:text-gray-300 cursor-pointer pt-2">
                   <Link to="/adminManageProducts">Manage Products</Link>
                 </li>
-                <li className="hover:text-gray-300 cursor-pointer">
+                <li className="hover:text-gray-300 cursor-pointer pt-2">
                   <Link to="/catManagement">Category</Link>
                 </li>
               </ul>
