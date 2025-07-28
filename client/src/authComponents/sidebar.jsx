@@ -44,6 +44,9 @@ function Sidebar({ children }) {
                 <li className="hover:text-gray-300 cursor-pointer">
                   <Link to="/adminManageProducts">Manage Products</Link>
                 </li>
+                <li className="hover:text-gray-300 cursor-pointer">
+                  <Link to="/catManagement">Category</Link>
+                </li>
               </ul>
             )}
           </li>
