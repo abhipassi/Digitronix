@@ -43,7 +43,6 @@ export const userLogin = async (req, res) => {
   }
 }
 
-
 // function for user sign up 
 
 export const userSignUp = async (req, res) => {
@@ -125,15 +124,17 @@ export const otpVerification = async (req, res) => {
 
 export const createCategory = async (req, res) => {
   const { categoryName, categoryDescription } = req.body
+  //  categoryName = categoryName.trim();
+  //   categoryDescription = categoryDescription.trim();
   try {
     const isExistingCategory = await categoryModel.findOne({ categoryName })
     if (isExistingCategory) {
-      return res.status(400).json({ msg: "Category already exist" })
+      return res.status(400).json({ msg: "Category already exist" })  
     }
 
     await categoryModel.create({
-      categoryName: categoryName,
-      categoryDescription: categoryDescription
+      categoryName: categoryName.trim(),  
+      categoryDescription: categoryDescription.trim()
     })
     return res.status(200).json({ msg: "Category created successfuly" })
   }
@@ -148,7 +149,6 @@ export const showCategory = async (req, res) => {
     res.json(category)
   } catch (error) {
     console.log(error);
-    
   }
 }
 
@@ -158,6 +158,12 @@ export const deleteCategory = async(req,res) =>{
     await categoryModel.deleteOne({categoryName})
     return res.status(200).json({msg:"Category Deleted Successfuly"})
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: error.message })
   }
+}
+
+export const updateCategory = async(req,res) =>{
+
+
+  
 }
