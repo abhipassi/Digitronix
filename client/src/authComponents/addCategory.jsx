@@ -20,8 +20,12 @@ function AddCategory() {
     try {
       const response = await axios.post("http://localhost:5000/createCategory", data)
       if (response.status === 200) {
+        setCategoryName("")
+        setCategoryDescription("")
         return toast.success("Category Created Successfuly")
+
       }
+
     } catch (error) {
       if (error.response.status === 400) {
         return toast.error("Category already exist")
@@ -44,12 +48,12 @@ function AddCategory() {
         <form className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium text-gray-700">Category Name</label>
-            <input type="text" required className="w-full border border-gray-300 rounded-md p-2 mt-1" onChange={handleCategoryName} />
+            <input type="text" required className="w-full border border-gray-300 rounded-md p-2 mt-1" value={categoryName} onChange={handleCategoryName} />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Description</label>
-            <input type="text" required className="w-full border border-gray-300 rounded-md p-2 mt-1" onChange={handleCategoryDescription} />
+            <input type="text" required className="w-full border border-gray-300 rounded-md p-2 mt-1" value={categoryDescription} onChange={handleCategoryDescription} />
           </div>
 
           <button
