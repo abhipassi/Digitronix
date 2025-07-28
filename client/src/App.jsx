@@ -18,6 +18,7 @@ import ManageProducts from './authComponents/manageProducts.jsx';
 import AddProducts from './authComponents/addProduct.jsx';
 import CategoryManagement from './authComponents/categoryManagement.jsx';
 import AddCategory from './authComponents/addCategory.jsx';
+import UpdateCategory from './authComponents/updateCategory.jsx';
 function App() {
   return (
     <>
@@ -36,6 +37,8 @@ function App() {
       <Route path='/addProduct' element = {<AddProducts/>}/>
       <Route path='/catManagement' element = {<CategoryManagement/>}/>
       <Route path='/addCategory' element = {<AddCategory/>}/>
+      <Route path='/updateCategory' element = {<UpdateCategory/>}/>
+
 
     </Routes>
     <ToastContainer position="top-right" autoClose={4000} limit={1} />
