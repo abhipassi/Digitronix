@@ -1,14 +1,15 @@
 import express from 'express'
 const router = express.Router()
 
-
 import {
     demo,
     userLogin,
     userSignUp,
     otpVerification,
     createCategory,
-    showCategory
+    showCategory,
+    deleteCategory,
+    updateCategory
     // getEmailForVerification
 } from '../controller/authController.js'
 
@@ -37,4 +38,11 @@ router.post('/createCategory', createCategory)
 
 // route for getting category in response 
 router.get('/showCategory', showCategory)
+
+// route for deleting a category 
+router.post("/deleteCategory", deleteCategory)
+
+// route for category updation 
+router.put("/updateCategory", updateCategory)
+
 export default router;
