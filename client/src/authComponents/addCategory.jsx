@@ -18,7 +18,7 @@ function AddCategory() {
     const data = { categoryName, categoryDescription }
 
     try {
-      const response = await axios.post("http://localhost:5000/createCategory", data)
+      const response = await axios.post("http://localhost:5000/createCategory",data)
       if (response.status === 200) {
         setCategoryName("")
         setCategoryDescription("")
@@ -35,7 +35,7 @@ function AddCategory() {
       }
     }
   }
-
+  
   return (
     <>
       <Sidebar >
