@@ -43,6 +43,6 @@ router.get('/showCategory', showCategory)
 router.post("/deleteCategory", deleteCategory)
 
 // route for category updation 
-router.put("/updateCategory", updateCategory)
+router.put("/updateCategory/:id", updateCategory)
 
 export default router;
