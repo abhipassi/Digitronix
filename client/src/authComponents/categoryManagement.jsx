@@ -4,17 +4,16 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+
 function CategoryManagement() {
   const [category, setCategory] = useState([])
-  const [updatedCategoryName, setUpdatedCategoryName] = useState("")
-  const [updatedCategoryDescription, setUpdatedCategoryDescription] = useState("")
 
   const [show, setShow] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState(null)
-  // const [selectedCategory, setSelectedCategory] = useState({
-  //   categoryName: '',
-  //   categoryDescription: ''
-  // });
+  const [selectedCategory, setSelectedCategory] = useState({
+  categoryName: '',
+  categoryDescription: ''
+});
+
 
   useEffect(() => {
     axios.get('http://localhost:5000/showCategory')
@@ -60,9 +59,23 @@ function CategoryManagement() {
     }));
 
   }
+  
+  const handleUpdatedCategoryDescription = (e) => {
+    setSelectedCategory(prev => ({
+      ...prev,
+      categoryDescription: e.target.value
+    }));
+    // console.log(selectedCategory.id);
+    
+  }
 
-  const handleUpdatedCategoryDescription = () => {
-
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+    // console.log(selectedCategory._id);
+    const response = await axios.put(`http://localhost:5000/updateCategory/${selectedCategory._id}`,selectedCategory)
+    console.log(response);
+    // console.log(selectedCategory.categoryName)
+    // console.log(selectedCategory.categoryDescription)
   }
   return (
     <>
@@ -80,7 +93,7 @@ function CategoryManagement() {
 
               <h1 className="font-bold text-2xl text-center mb-6">Update Category</h1>
 
-              <form className="w-full space-y-4">
+              <form className="w-full space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Category Name
@@ -89,7 +102,7 @@ function CategoryManagement() {
                     type="text"
                     required
                     // value={selectedCategory.categoryName}
-                    value={selectedCategory?.categoryName || ""}
+                    value={selectedCategory.categoryName}
                     onChange={handleUpdatedCategoryName}
                     className="w-full border border-gray-300 rounded-md p-2 mt-1"
                   />
@@ -102,7 +115,7 @@ function CategoryManagement() {
                   <input
                     type="text"
                     required
-                    value={selectedCategory.categoryDescription}
+                    value={selectedCategory?.categoryDescription}
                     onChange={handleUpdatedCategoryDescription}
                     className="w-full border border-gray-300 rounded-md p-2 mt-1"
                   />
