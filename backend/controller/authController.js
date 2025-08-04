@@ -162,8 +162,9 @@ export const deleteCategory = async(req,res) =>{
   }
 }
 
-export const updateCategory = async(req,res) =>{
+export const updateCategory = (req,res) =>{
+console.log(req.body);
+console.log(req.params.id);
 
-
-  
+res.json("Done")
 }
