@@ -9,7 +9,8 @@ import {
     createCategory,
     showCategory,
     deleteCategory,
-    updateCategory
+    updateCategory,
+    addProducts
     // getEmailForVerification
 } from '../controller/authController.js'
 
@@ -44,5 +45,7 @@ router.post("/deleteCategory", deleteCategory)
 
 // route for category updation 
 router.put("/updateCategory/:id", updateCategory)
+
+router.post("/addProduct", addProducts)
 
 export default router;
