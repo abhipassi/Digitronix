@@ -10,9 +10,9 @@ function CategoryManagement() {
 
   const [show, setShow] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState({
-  categoryName: '',
-  categoryDescription: ''
-});
+    categoryName: '',
+    categoryDescription: ''
+  });
 
 
   useEffect(() => {
@@ -59,23 +59,32 @@ function CategoryManagement() {
     }));
 
   }
-  
+
   const handleUpdatedCategoryDescription = (e) => {
     setSelectedCategory(prev => ({
       ...prev,
       categoryDescription: e.target.value
     }));
     // console.log(selectedCategory.id);
-    
+
   }
 
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // console.log(selectedCategory._id);
-    const response = await axios.put(`http://localhost:5000/updateCategory/${selectedCategory._id}`,selectedCategory)
-    console.log(response);
-    // console.log(selectedCategory.categoryName)
-    // console.log(selectedCategory.categoryDescription)
+    try {
+      const response = await axios.put(`http://localhost:5000/updateCategory/${selectedCategory._id}`, selectedCategory)
+      // console.log(response);
+      if (response.status === 200) {
+        toast.success("Category updated successfuly")
+      }
+      setShow(false)
+    } catch (error) {
+      toast.error("Something went wrong")
+      console.log(error);
+      
+    }
+
+
   }
   return (
     <>
@@ -161,7 +170,5 @@ function CategoryManagement() {
       </Sidebar>
     </>
   );
-
 }
-
 export default CategoryManagement
