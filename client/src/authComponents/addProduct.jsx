@@ -1,6 +1,12 @@
 import React from 'react'
 import Sidebar from './sidebar'
+import { useState } from 'react'
 function AddProducts() {
+
+  const [productDetails, setProdductDetails] = useState({
+    
+  })
+
   return (
     <>
       <Sidebar>
