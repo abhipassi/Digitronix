@@ -162,9 +162,27 @@ export const deleteCategory = async(req,res) =>{
   }
 }
 
-export const updateCategory = (req,res) =>{
-console.log(req.body);
-console.log(req.params.id);
+export const updateCategory = async (req,res) =>{
+const categoryName = req.body.categoryName
+const categoryDescription = req.body.categoryDescription
+// console.log(req.params.id);
+try {
+  let updateCategory = await categoryModel.findByIdAndUpdate(
+    req.params.id,
+    {$set:req.body},
+    {new:true}
+  )
+
+  res.status(200).json("Updated")
+} catch (error) {
+  console.log(error);
+}
 
 res.json("Done")
+}
+
+export const addProducts = async(req,res) =>{
+  console.log(req.body);
+  
+  res.json("Done")
 }
