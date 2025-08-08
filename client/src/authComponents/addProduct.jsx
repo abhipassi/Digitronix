@@ -4,7 +4,7 @@ import { useState } from 'react'
 function AddProducts() {
 
   const [productDetails, setProdductDetails] = useState({
-    
+
   })
 
   return (
@@ -63,7 +63,7 @@ function AddProducts() {
             Submit
           </button>
         </form>
-        
+
       </Sidebar>
     </>
   )
