@@ -182,7 +182,7 @@ res.json("Done")
 }
 
 export const addProducts = async(req,res) =>{
-  console.log(req.body);
+  console.log(req.body)
   
   res.json("Done")
 }
