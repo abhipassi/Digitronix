@@ -63,8 +63,7 @@ function AddProducts() {
             Submit
           </button>
         </form>
-
-
+        
       </Sidebar>
     </>
   )
